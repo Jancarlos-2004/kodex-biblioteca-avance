@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: kodex-biblioteca-avance
+    runtime: docker
+    plan: free
+    region: oregon
+    healthCheckPath: /
+    envVars:
+      # Reutiliza la base de datos creada por el proyecto final
+      # (render.yaml de kodex-biblioteca-render).
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: kodex-db
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: kodex-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: kodex-db
+          property: password
